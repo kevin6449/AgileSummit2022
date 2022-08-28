@@ -19,9 +19,9 @@ except Exception as ex:
 # Get a handle to the workspace
 ml_client = MLClient(
     credential=credential,
-    subscription_id="630fbb67-7809-49f9-af9c-55704307b953",
-    resource_group_name="RG_MachineLearning",
-    workspace_name="mlaiws"
+    subscription_id="<<SUBSCRIPTION_ID>>",
+    resource_group_name="<<RESOURCE_GROUP_NAME>>",
+    workspace_name="<<MACHINE_LEARNING_WORKSPACE_NAME>>"
 )
 print(ml_client)
 
