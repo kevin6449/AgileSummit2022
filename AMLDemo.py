@@ -25,8 +25,8 @@ except Exception as ex:
 ml_client = MLClient(
     credential=credential,
     subscription_id="<<SUBSCRIPTION_ID>>",
-    resource_group_name="RESOURCE_GROUP_NAME",
-    workspace_name="MACHINE_LEARNING_WORKSPACE_NAME"
+    resource_group_name="<<RESOURCE_GROUP_NAME>>",
+    workspace_name="<<MACHINE_LEARNING_WORKSPACE_NAME>>"
 )
 print(ml_client)
 
