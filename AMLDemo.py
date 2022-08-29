@@ -41,9 +41,9 @@ except Exception:
     compute_target = AmlCompute(
         name=compute_target_name,
         type="amlcompute",
-        size="Standard_DS3_v2",
+        size="Standard_D2s_v3",
         min_instances=0,
-        max_instances=1,
+        max_instances=2,
         idle_time_before_scale_down=120,
         tier="Dedicated"
     )
