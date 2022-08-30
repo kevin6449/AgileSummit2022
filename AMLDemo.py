@@ -83,10 +83,22 @@ print("Job url:", returned_job.services["Studio"].endpoint)
 job_path = f"azureml://jobs/{returned_job.name}/outputs/artifacts/paths/model/"
 print("Job path:", job_path) 
 
-# Register the model
+# Tracking run status
 import time
 
-while True: 
+azureml_mlflow_uri = ml_client.workspaces.get(ml_client.workspace_name).mlflow_tracking_uri
+mlflow.set_tracking_uri(azureml_mlflow_uri)
+mlflow.set_experiment(experiment_name)
+
+while True:
+    run = mlflow.active_run()
+    print("MLflow active_run:", run)
+    if run != "None":
+        break;
+    else:
+        time.sleep(5)
+
+while True:
     status = mlflow.get_run(returned_job.name).info.status
     print("Job status:", status)
     if status == "FINISHED":
@@ -94,10 +106,14 @@ while True:
     else:
         time.sleep(5)
 
+# Register the model
 run_model = Model(
     path=job_path,
     name="IrisModel",
     description=f"Model created from experiment {experiment_name} run {returned_job.name}.",
     type="mlflow_model"
 )
-ml_client.models.create_or_update(run_model) 
+ml_client.models.create_or_update(run_model)
+print("Model registered")
+
+print("Training finished.")
